@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>AquaSentinel AI (SubSea Vision) - Autonomous Underwater Marine Debris & Anomaly Detection System</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ocean: {
+                950: '#020B14',
+                900: '#041527',
+                850: '#08213D',
+                800: '#0E3158',
+                700: '#17487F',
+                cyan: '#00F0FF',
+                emerald: '#00E699',
+                hazard: '#FF3366',
+                warning: '#FFB800'
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              hud: ['Orbitron', 'monospace'],
+              arabic: ['Cairo', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Google Fonts: Inter, Orbitron, Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        background-color: #020B14;
+        color: #E2E8F0;
+        font-family: 'Inter', sans-serif;
+        overscroll-behavior: none;
+      }
+      .font-hud { font-family: 'Orbitron', monospace; }
+      .font-arabic { font-family: 'Cairo', sans-serif; }
+
+      /* Sonar Radar Sweep Animation */
+      @keyframes sonar-sweep {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .sonar-sweep {
+        animation: sonar-sweep 4s linear infinite;
+        transform-origin: center center;
+      }
+
+      /* Underwater caustic shimmer */
+      @keyframes ocean-pulse {
+        0% { opacity: 0.3; }
+        50% { opacity: 0.6; }
+        100% { opacity: 0.3; }
+      }
+      .ocean-pulse {
+        animation: ocean-pulse 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body class="bg-[#020B14] text-slate-100 antialiased selection:bg-cyan-400 selection:text-black">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
