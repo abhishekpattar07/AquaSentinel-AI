@@ -255,23 +255,23 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020B14] text-slate-100 flex flex-col items-center selection:bg-cyan-400 selection:text-black">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center selection:bg-sky-500 selection:text-white">
       {/* Top Banner & Header */}
-      <header className="w-full max-w-6xl px-4 py-3 border-b border-ocean-800/80 flex items-center justify-between sticky top-0 bg-[#020B14]/90 backdrop-blur z-40">
+      <header className="w-full max-w-6xl px-4 py-3 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-md z-40 shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-teal-500 text-black flex items-center justify-center font-bold text-xl shadow-lg shadow-cyan-500/20">
-            <Waves className="w-6 h-6" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 via-teal-500 to-emerald-500 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-sky-500/20">
+            <Waves className="w-6 h-6 text-white" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="font-hud text-base sm:text-lg font-black tracking-wider text-white">
-                AQUASENTINEL <span className="text-cyan-400">AI</span>
+              <h1 className="font-hud text-base sm:text-lg font-black tracking-wider text-slate-900">
+                AQUASENTINEL <span className="text-sky-600">AI</span>
               </h1>
-              <span className="text-xs font-arabic text-teal-300 font-bold px-2 py-0.5 bg-teal-950/60 rounded border border-teal-800/40">
+              <span className="text-xs font-arabic text-teal-800 font-bold px-2 py-0.5 bg-teal-50 rounded border border-teal-200">
                 بحر-سنتينل
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-mono">
+            <p className="text-[11px] text-slate-500 font-mono">
               Autonomous Underwater Debris & Anomaly Sentry • UN SDG 14 / NOVA 2026
             </p>
           </div>
@@ -280,22 +280,22 @@ export function App() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowDashboard(false)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-ocean-900/90 hover:bg-cyan-950 border border-ocean-700 hover:border-cyan-500/50 rounded-xl text-xs font-hud text-cyan-300 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl text-xs font-hud font-semibold text-slate-800 transition cursor-pointer shadow-sm"
             title="Return to Landing Page"
           >
-            <Home className="w-3.5 h-3.5 text-cyan-400" />
+            <Home className="w-3.5 h-3.5 text-sky-600" />
             <span className="hidden sm:inline">HOME</span>
           </button>
           <button
             onClick={() => setIsPitchDeckOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-ocean-900/90 hover:bg-cyan-950 border border-ocean-700 hover:border-cyan-500/50 rounded-xl text-xs font-hud text-cyan-300 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl text-xs font-hud font-semibold text-slate-800 transition cursor-pointer shadow-sm"
             title="Open Pitch Deck"
           >
-            <Presentation className="w-3.5 h-3.5 text-cyan-400" />
+            <Presentation className="w-3.5 h-3.5 text-sky-600" />
             <span className="hidden sm:inline">PITCH DECK</span>
           </button>
-          <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-ocean-900 border border-ocean-700 rounded-full text-[11px] text-slate-300 font-mono">
-            <Award className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-sky-50 border border-sky-200 rounded-full text-[11px] text-sky-800 font-mono font-medium">
+            <Award className="w-3.5 h-3.5 text-sky-600" />
             <span>BITS Pilani Dubai Grand Finale Track</span>
           </div>
         </div>
@@ -318,9 +318,9 @@ export function App() {
             />
 
             {/* Tactical Subsea Info Bar */}
-            <div className="bg-ocean-950 p-3 rounded-xl border border-ocean-800 flex items-center justify-between text-xs text-slate-400 font-mono">
-              <span>🌊 Mission: <strong>{currentScenario.title}</strong></span>
-              <span>⚡ Spectral Split: <strong className="text-cyan-400">{Math.round(splitRatio * 100)}% (Raw ◀▶ AI Restored)</strong></span>
+            <div className="bg-white p-3.5 rounded-xl border border-slate-200 flex items-center justify-between text-xs text-slate-600 font-mono shadow-sm">
+              <span>🌊 Mission: <strong className="text-slate-900">{currentScenario.title}</strong></span>
+              <span>⚡ Spectral Split: <strong className="text-sky-700">{Math.round(splitRatio * 100)}% (Raw ◀▶ AI Restored)</strong></span>
             </div>
           </div>
 

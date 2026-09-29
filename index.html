@@ -43,8 +43,8 @@
 
     <style>
       body {
-        background-color: #020B14;
-        color: #E2E8F0;
+        background-color: #F8FAFC;
+        color: #0F172A;
         font-family: 'Inter', sans-serif;
         overscroll-behavior: none;
       }
@@ -52,19 +52,18 @@
       .font-mono { font-family: 'Fira Code', monospace; }
       .font-arabic { font-family: 'Cairo', sans-serif; }
 
-      /* Glassmorphism Classes */
+      /* Crisp White & Card Classes */
       .glass-card {
-        background: rgba(4, 21, 39, 0.72);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(0, 240, 255, 0.15);
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
       }
       .glass-card-hover {
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .glass-card-hover:hover {
-        border-color: rgba(0, 240, 255, 0.35);
-        box-shadow: 0 12px 30px -10px rgba(0, 240, 255, 0.15);
+        border-color: #94A3B8;
+        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
         transform: translateY(-2px);
       }
 
@@ -78,21 +77,21 @@
         transform-origin: center center;
       }
 
-      /* Underwater caustic shimmer */
-      @keyframes ocean-pulse {
-        0% { opacity: 0.3; }
-        50% { opacity: 0.6; }
-        100% { opacity: 0.3; }
+      /* Subtle Light Caustic Pulse */
+      @keyframes ocean-pulse-light {
+        0% { opacity: 0.2; }
+        50% { opacity: 0.45; }
+        100% { opacity: 0.2; }
       }
       .ocean-pulse {
-        animation: ocean-pulse 3s ease-in-out infinite;
+        animation: ocean-pulse-light 4s ease-in-out infinite;
       }
 
-      /* Custom Range Slider */
+      /* Clean Range Slider */
       input[type="range"] {
         -webkit-appearance: none;
         appearance: none;
-        background: #0E3158;
+        background: #E2E8F0;
         border-radius: 9999px;
         height: 6px;
         outline: none;
@@ -103,9 +102,9 @@
         width: 18px;
         height: 18px;
         border-radius: 50%;
-        background: #00F0FF;
+        background: #0284C7;
         cursor: pointer;
-        box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
         transition: transform 0.15s ease;
       }
       input[type="range"]::-webkit-slider-thumb:hover {
@@ -133,7 +132,7 @@
       }
     </style>
   </head>
-  <body class="bg-[#020B14] text-slate-100 antialiased selection:bg-cyan-400 selection:text-black">
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-sky-500 selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

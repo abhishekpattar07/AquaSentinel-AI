@@ -72,42 +72,44 @@ export const ROVMissionModal: React.FC<Props> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-      <div className="relative w-full max-w-2xl bg-ocean-950 border border-ocean-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+      <div className="relative w-full max-w-2xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-ocean-800 bg-ocean-900">
-          <div className="flex items-center gap-2">
-            <Anchor className="w-5 h-5 text-cyan-400" />
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 bg-sky-100 rounded-xl text-sky-700">
+              <Anchor className="w-5 h-5" />
+            </div>
             <div>
-              <h3 className="font-hud text-base font-bold text-white">
+              <h3 className="font-hud text-base font-bold text-slate-900">
                 AUTONOMOUS AUV / ROV MISSION DISPATCH
               </h3>
-              <p className="text-[11px] font-mono text-slate-400">
+              <p className="text-[11px] font-mono text-slate-500">
                 Subsea Ecological Cleanup Telemetry Order
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-ocean-800 transition"
+            className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-200 transition cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto space-y-4 font-mono text-xs text-slate-300">
+        <div className="p-6 overflow-y-auto space-y-4 font-mono text-xs text-slate-700">
           {/* Status Box */}
-          <div className="p-3 bg-ocean-900/80 rounded-xl border border-ocean-800 flex items-center justify-between">
+          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between shadow-sm">
             <div>
-              <span className="text-slate-400">MISSION DESIGNATION:</span>
-              <div className="text-sm font-hud font-bold text-cyan-400">{missionId}</div>
+              <span className="text-slate-500 text-[11px]">MISSION DESIGNATION:</span>
+              <div className="text-sm font-hud font-bold text-sky-700">{missionId}</div>
             </div>
             <div className="text-right">
-              <span className="text-slate-400">THREAT STATUS:</span>
+              <span className="text-slate-500 text-[11px]">THREAT STATUS:</span>
               <div>
-                <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                  scenario.expectedThreat === 'critical' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-yellow-500/20 text-yellow-400'
+                <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                  scenario.expectedThreat === 'critical' ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-amber-100 text-amber-800 border border-amber-200'
                 }`}>
                   {scenario.expectedThreat}
                 </span>
@@ -116,46 +118,46 @@ export const ROVMissionModal: React.FC<Props> = ({
           </div>
 
           {/* Coordinates & Physical Site Specs */}
-          <div className="grid grid-cols-3 gap-2">
-            <div className="p-3 bg-ocean-900/60 rounded-lg border border-ocean-800">
-              <span className="text-[10px] text-slate-400">COORDINATES</span>
-              <div className="text-xs font-bold text-white mt-0.5">{scenario.coordinates}</div>
+          <div className="grid grid-cols-3 gap-2.5">
+            <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+              <span className="text-[10px] text-slate-500">COORDINATES</span>
+              <div className="text-xs font-bold text-slate-900 mt-0.5">{scenario.coordinates}</div>
             </div>
-            <div className="p-3 bg-ocean-900/60 rounded-lg border border-ocean-800">
-              <span className="text-[10px] text-slate-400">TARGET DEPTH</span>
-              <div className="text-xs font-bold text-cyan-400 mt-0.5">{scenario.depthMeters} Meters</div>
+            <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+              <span className="text-[10px] text-slate-500">TARGET DEPTH</span>
+              <div className="text-xs font-bold text-sky-700 mt-0.5">{scenario.depthMeters} Meters</div>
             </div>
-            <div className="p-3 bg-ocean-900/60 rounded-lg border border-ocean-800">
-              <span className="text-[10px] text-slate-400">EST. DEBRIS MASS</span>
-              <div className="text-xs font-bold text-yellow-400 mt-0.5">~{totalWeightKg.toFixed(1)} kg</div>
+            <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+              <span className="text-[10px] text-slate-500">EST. DEBRIS MASS</span>
+              <div className="text-xs font-bold text-amber-700 mt-0.5">~{totalWeightKg.toFixed(1)} kg</div>
             </div>
           </div>
 
           {/* Robotic Payload Tooling */}
-          <div className="p-3.5 bg-ocean-900/60 rounded-xl border border-ocean-800 space-y-2">
-            <div className="flex items-center gap-1.5 text-cyan-400 font-bold">
-              <Cpu className="w-4 h-4" />
+          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+            <div className="flex items-center gap-1.5 text-sky-800 font-bold">
+              <Cpu className="w-4 h-4 text-sky-600" />
               <span>ROBOTIC MANIPULATOR PAYLOAD ASSIGNMENT</span>
             </div>
-            <div className="p-2.5 bg-ocean-950 rounded border border-ocean-800 text-white font-semibold">
+            <div className="p-3 bg-white rounded-xl border border-slate-200 text-slate-900 font-semibold shadow-sm">
               {payloadTool}
             </div>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-600">
               <strong>Directive:</strong> {recommendedAction}
             </p>
           </div>
 
           {/* Identified Debris Breakdown */}
-          <div className="p-3.5 bg-ocean-900/60 rounded-xl border border-ocean-800 space-y-2">
-            <div className="flex items-center gap-1.5 text-yellow-400 font-bold">
-              <ShieldAlert className="w-4 h-4" />
+          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+            <div className="flex items-center gap-1.5 text-slate-800 font-bold">
+              <ShieldAlert className="w-4 h-4 text-amber-600" />
               <span>CONFIRMED HAZARD TARGETS ({debrisItems.length})</span>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               {debrisItems.map((d, i) => (
-                <div key={i} className="flex items-center justify-between p-1.5 bg-ocean-950/70 rounded border border-ocean-800 text-[11px]">
-                  <span className="text-white font-bold">{d.label}</span>
-                  <span className="text-cyan-400">CONF: {Math.round(d.confidence * 100)}%</span>
+                <div key={i} className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-slate-200 text-[11px] shadow-sm">
+                  <span className="text-slate-900 font-bold">{d.label}</span>
+                  <span className="text-sky-700 font-semibold">CONF: {Math.round(d.confidence * 100)}%</span>
                 </div>
               ))}
             </div>
@@ -163,21 +165,21 @@ export const ROVMissionModal: React.FC<Props> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="flex items-center justify-between px-6 py-4 border-t border-ocean-800 bg-ocean-900/90 backdrop-blur">
+        <div className="flex items-center justify-between px-6 py-4 border-t border-slate-200 bg-slate-50">
           <button
             onClick={downloadBrief}
-            className="flex items-center gap-1.5 px-4 py-2 bg-ocean-800 hover:bg-ocean-700 text-slate-200 text-xs font-semibold rounded-lg transition cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 text-xs font-semibold rounded-xl transition cursor-pointer shadow-sm"
           >
-            <Download className="w-4 h-4 text-cyan-400" /> Download Telemetry Brief (JSON)
+            <Download className="w-4 h-4 text-sky-600" /> Download Telemetry Brief (JSON)
           </button>
 
           <button
             disabled={isDeployed}
             onClick={handleDeploy}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-hud font-bold text-xs transition shadow-lg cursor-pointer ${
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-hud font-bold text-xs transition shadow-sm cursor-pointer ${
               isDeployed
                 ? 'bg-emerald-600 text-white cursor-default'
-                : 'bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 text-black shadow-emerald-500/20'
+                : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/20'
             }`}
           >
             {isDeployed ? (

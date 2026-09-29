@@ -239,52 +239,52 @@ export const VideoAnalyzer = forwardRef<VideoAnalyzerRef, Props>(({
           className="absolute top-0 bottom-0 pointer-events-none z-20 flex items-center justify-center"
           style={{ left: `${splitRatio * 100}%`, transform: 'translateX(-50%)' }}
         >
-          {/* Vertical dividing line with neon glow */}
-          <div className="w-0.5 h-full bg-cyan-400 shadow-[0_0_12px_#00F0FF]"></div>
+          {/* Vertical dividing line */}
+          <div className="w-0.5 h-full bg-sky-400 shadow-[0_0_8px_rgba(2,132,199,0.8)]"></div>
 
           {/* Central Handle Puck */}
-          <div className="absolute w-9 h-9 rounded-full bg-ocean-950/90 border-2 border-cyan-400 flex items-center justify-center text-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.6)] backdrop-blur">
-            <ChevronsLeftRight className="w-4 h-4 text-cyan-400" />
+          <div className="absolute w-8 h-8 rounded-full bg-white border-2 border-sky-600 flex items-center justify-center text-sky-700 shadow-lg">
+            <ChevronsLeftRight className="w-4 h-4 text-sky-600" />
           </div>
         </div>
 
         {/* Floating Split Mode Labels */}
         <div className="absolute top-14 left-4 z-10 pointer-events-none">
-          <span className="px-2.5 py-1 rounded bg-black/60 backdrop-blur border border-white/20 text-[10px] font-hud text-slate-300 tracking-wider">
+          <span className="px-2.5 py-1 rounded-md bg-black/60 backdrop-blur border border-white/20 text-[10px] font-hud text-slate-200 tracking-wider">
             RAW ATTENUATED
           </span>
         </div>
         <div className="absolute top-14 right-4 z-10 pointer-events-none">
-          <span className="px-2.5 py-1 rounded bg-cyan-950/70 backdrop-blur border border-cyan-400/40 text-[10px] font-hud text-cyan-300 tracking-wider font-bold">
+          <span className="px-2.5 py-1 rounded-md bg-sky-900/80 backdrop-blur border border-sky-400/50 text-[10px] font-hud text-sky-200 tracking-wider font-bold">
             AI DEHAZED (BEER-LAMBERT)
           </span>
         </div>
 
         {/* Top Left Telemetry HUD */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 font-hud text-xs pointer-events-none z-10">
-          <div className="flex items-center gap-2 bg-ocean-950/85 backdrop-blur px-3 py-1.5 rounded-lg border border-ocean-700/60 text-cyan-300">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          <div className="flex items-center gap-2 bg-slate-950/80 backdrop-blur px-3 py-1.5 rounded-lg border border-slate-700/60 text-sky-300">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>AUV CAM-01 • {currentScenario.location}</span>
           </div>
 
-          <div className="flex items-center gap-3 bg-ocean-950/80 backdrop-blur px-3 py-1 rounded border border-ocean-800 text-[11px] text-slate-400 font-mono">
+          <div className="flex items-center gap-3 bg-slate-950/80 backdrop-blur px-3 py-1 rounded border border-slate-800 text-[11px] text-slate-300 font-mono">
             <span>DEPTH: <strong className="text-white">-{currentScenario.depthMeters}m</strong></span>
-            <span>TURBIDITY: <strong className="text-yellow-400">{currentScenario.turbidityPct}%</strong></span>
-            <span>TEMP: <strong className="text-cyan-400">{currentScenario.tempCelsius}°C</strong></span>
+            <span>TURBIDITY: <strong className="text-amber-400">{currentScenario.turbidityPct}%</strong></span>
+            <span>TEMP: <strong className="text-sky-300">{currentScenario.tempCelsius}°C</strong></span>
           </div>
         </div>
 
         {/* Top Right Split Percentage Badge */}
         <div className="absolute top-3 right-3 flex items-center gap-2 pointer-events-none z-10">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-ocean-950/85 backdrop-blur border border-cyan-400/50 text-cyan-300 font-hud text-xs font-bold shadow-lg">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950/80 backdrop-blur border border-sky-400/50 text-sky-300 font-hud text-xs font-bold shadow-lg">
+            <Sparkles className="w-3.5 h-3.5 text-sky-400" />
             <span>SPLIT: {Math.round(splitRatio * 100)}%</span>
           </div>
         </div>
 
         {/* Threat Alert Banner if Critical */}
         {currentScenario.expectedThreat === 'critical' && (
-          <div className="absolute top-12 inset-x-0 mx-auto w-max bg-red-600/90 text-white font-hud text-xs font-bold px-4 py-1.5 rounded-full flex items-center gap-2 animate-bounce border border-red-400 shadow-lg pointer-events-none z-10">
+          <div className="absolute top-12 inset-x-0 mx-auto w-max bg-red-600 text-white font-hud text-xs font-bold px-4 py-1.5 rounded-full flex items-center gap-2 animate-bounce border border-red-300 shadow-lg pointer-events-none z-10">
             <AlertTriangle className="w-4 h-4" />
             <span>CRITICAL MARINE HAZARD DETECTED</span>
           </div>
@@ -292,9 +292,9 @@ export const VideoAnalyzer = forwardRef<VideoAnalyzerRef, Props>(({
 
         {/* Scanning Radar HUD Pulse */}
         {isScanning && (
-          <div className="absolute inset-0 border-2 border-cyan-400/40 pointer-events-none flex items-center justify-center z-10">
-            <div className="w-64 h-64 rounded-full border border-cyan-400/30 animate-ping opacity-30"></div>
-            <div className="absolute bottom-14 bg-ocean-950/90 border border-cyan-400 text-cyan-400 px-4 py-1.5 rounded-full text-xs font-hud font-bold tracking-widest">
+          <div className="absolute inset-0 border-2 border-sky-400/40 pointer-events-none flex items-center justify-center z-10">
+            <div className="w-64 h-64 rounded-full border border-sky-400/30 animate-ping opacity-30"></div>
+            <div className="absolute bottom-14 bg-slate-950/90 border border-sky-400 text-sky-300 px-4 py-1.5 rounded-full text-xs font-hud font-bold tracking-widest">
               NEURAL SCAN IN PROGRESS...
             </div>
           </div>
@@ -302,8 +302,8 @@ export const VideoAnalyzer = forwardRef<VideoAnalyzerRef, Props>(({
 
         {/* Bottom Controls Bar */}
         <div className="absolute bottom-3 inset-x-3 flex items-center justify-between pointer-events-auto z-10">
-          <div className="flex items-center gap-2 bg-ocean-950/85 backdrop-blur px-3 py-1.5 rounded-lg border border-ocean-800 text-xs text-slate-300 font-mono">
-            <Compass className="w-4 h-4 text-cyan-400" />
+          <div className="flex items-center gap-2 bg-slate-950/85 backdrop-blur px-3 py-1.5 rounded-lg border border-slate-700 text-xs text-slate-300 font-mono">
+            <Compass className="w-4 h-4 text-sky-400" />
             <span>GPS: {currentScenario.coordinates}</span>
           </div>
 
@@ -311,14 +311,14 @@ export const VideoAnalyzer = forwardRef<VideoAnalyzerRef, Props>(({
             {customVideoUrl && (
               <button
                 onClick={() => setCustomVideoUrl(null)}
-                className="px-3 py-1 bg-cyan-400 text-black font-semibold rounded-lg text-xs hover:bg-cyan-300 transition font-mono cursor-pointer"
+                className="px-3 py-1 bg-sky-500 text-white font-semibold rounded-lg text-xs hover:bg-sky-400 transition font-mono cursor-pointer shadow-sm"
               >
                 Reset
               </button>
             )}
 
             <label
-              className="p-2 bg-ocean-900/85 backdrop-blur text-slate-300 hover:text-white rounded-lg border border-ocean-700 hover:border-cyan-400 transition cursor-pointer"
+              className="p-2 bg-slate-900/85 backdrop-blur text-slate-300 hover:text-white rounded-lg border border-slate-700 hover:border-sky-400 transition cursor-pointer"
               title="Upload Custom Video / Image"
             >
               <Upload className="w-4 h-4" />
@@ -330,7 +330,7 @@ export const VideoAnalyzer = forwardRef<VideoAnalyzerRef, Props>(({
               className={`p-2 rounded-lg border transition cursor-pointer ${
                 useLiveCamera
                   ? 'bg-emerald-600 text-white border-emerald-400'
-                  : 'bg-ocean-900/85 text-slate-300 hover:text-white border-ocean-700 hover:border-cyan-400'
+                  : 'bg-slate-900/85 text-slate-300 hover:text-white border-slate-700 hover:border-sky-400'
               }`}
               title="Toggle Live Webcam / USB Underwater Cam"
             >
@@ -341,39 +341,39 @@ export const VideoAnalyzer = forwardRef<VideoAnalyzerRef, Props>(({
       </div>
 
       {/* Interactive Split-Slider Quick Presets & Guidance Bar */}
-      <div className="glass-card flex flex-wrap items-center justify-between gap-2 p-2.5 rounded-xl text-xs font-mono text-slate-300 shadow-md">
+      <div className="bg-white border border-slate-200 flex flex-wrap items-center justify-between gap-2 p-3 rounded-xl text-xs font-mono text-slate-700 shadow-sm">
         <div className="flex items-center gap-2">
-          <SlidersHorizontal className="w-4 h-4 text-cyan-400" />
-          <span className="text-slate-400">Drag video split or select quick presets:</span>
+          <SlidersHorizontal className="w-4 h-4 text-sky-600" />
+          <span className="text-slate-600 font-sans">Drag video split or select quick presets:</span>
         </div>
 
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => onSplitRatioChange(0.98)}
-            className={`px-3 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
               splitRatio > 0.85
-                ? 'bg-slate-700 text-white border border-slate-500 shadow-sm'
-                : 'bg-ocean-950 text-slate-400 hover:text-white border border-transparent'
+                ? 'bg-slate-800 text-white shadow-sm'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             100% RAW
           </button>
           <button
             onClick={() => onSplitRatioChange(0.5)}
-            className={`px-3 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
               splitRatio >= 0.4 && splitRatio <= 0.6
-                ? 'bg-cyan-500 text-black border border-cyan-300 shadow-md shadow-cyan-500/20'
-                : 'bg-ocean-950 text-slate-400 hover:text-white border border-transparent'
+                ? 'bg-sky-600 text-white shadow-sm shadow-sky-600/30'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             50/50 SPLIT
           </button>
           <button
             onClick={() => onSplitRatioChange(0.02)}
-            className={`px-3 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
               splitRatio < 0.15
-                ? 'bg-cyan-400 text-black border border-cyan-300 shadow-md shadow-cyan-500/20'
-                : 'bg-ocean-950 text-slate-400 hover:text-white border border-transparent'
+                ? 'bg-sky-600 text-white shadow-sm shadow-sky-600/30'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             100% DEHAZED
