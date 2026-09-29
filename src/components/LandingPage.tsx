@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Waves,
   Anchor,
@@ -12,6 +12,7 @@ import {
   Cpu,
   Presentation,
   Play,
+  RotateCcw,
   Compass,
 } from 'lucide-react';
 
@@ -20,31 +21,179 @@ interface Props {
   onOpenPitchDeck: () => void;
 }
 
+/**
+ * 🌊 OceanHeroCanvas: Continuous 60fps living ocean caustics & particle simulation
+ * Renders shimmering sunlight water rays, buoyant micro-bubbles, and reactive water ripples.
+ */
+const OceanHeroCanvas: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animId: number;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Particle system: 38 buoyant bubbles & glowing plankton
+    const particles = Array.from({ length: 38 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 3 + 1,
+      speedY: Math.random() * 0.7 + 0.3,
+      speedX: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.45 + 0.25,
+      wobbleSpeed: Math.random() * 0.02 + 0.01,
+      wobbleOffset: Math.random() * Math.PI * 2,
+    }));
+
+    let mouseX = width / 2;
+    let mouseY = height * 0.35;
+    let targetX = mouseX;
+    let targetY = mouseY;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
+    let time = 0;
+    const render = () => {
+      time += 0.018;
+      mouseX += (targetX - mouseX) * 0.06;
+      mouseY += (targetY - mouseY) * 0.06;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Shimmering sunlight rays / water caustics
+      for (let i = 0; i < 4; i++) {
+        const rayAngle = -0.16 + Math.sin(time * 0.35 + i * 1.2) * 0.05;
+        const rayX = width * (0.18 + i * 0.24) + Math.cos(time * 0.25 + i) * 35;
+        const grad = ctx.createLinearGradient(
+          rayX,
+          0,
+          rayX + Math.tan(rayAngle) * height,
+          height
+        );
+        grad.addColorStop(0, 'rgba(14, 165, 233, 0.14)');
+        grad.addColorStop(0.45, 'rgba(20, 184, 166, 0.07)');
+        grad.addColorStop(1, 'rgba(248, 250, 252, 0)');
+
+        ctx.save();
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        const topW = 45 + i * 18;
+        const botW = 150 + i * 40;
+        ctx.moveTo(rayX - topW / 2, 0);
+        ctx.lineTo(rayX + topW / 2, 0);
+        ctx.lineTo(rayX + Math.tan(rayAngle) * height + botW / 2, height);
+        ctx.lineTo(rayX + Math.tan(rayAngle) * height - botW / 2, height);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 2. Interactive fluid cursor wake
+      const rippleGrad = ctx.createRadialGradient(
+        mouseX,
+        mouseY,
+        0,
+        mouseX,
+        mouseY,
+        260
+      );
+      rippleGrad.addColorStop(0, 'rgba(2, 132, 199, 0.09)');
+      rippleGrad.addColorStop(0.6, 'rgba(13, 148, 136, 0.04)');
+      rippleGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = rippleGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // 3. Floating buoyant bubbles
+      particles.forEach((p) => {
+        p.y -= p.speedY;
+        p.x += Math.sin(time * p.wobbleSpeed * 60 + p.wobbleOffset) * 0.45 + p.speedX;
+
+        if (p.y < -15) {
+          p.y = height + 15;
+          p.x = Math.random() * width;
+        }
+        if (p.x < -15) p.x = width + 15;
+        if (p.x > width + 15) p.x = -15;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(2, 132, 199, ${p.opacity * 0.55})`;
+        ctx.fill();
+
+        if (p.radius > 2) {
+          ctx.beginPath();
+          ctx.arc(p.x - p.radius * 0.3, p.y - p.radius * 0.3, p.radius * 0.35, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 0.9})`;
+          ctx.fill();
+        }
+        ctx.restore();
+      });
+
+      animId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animId);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0"
+      style={{ opacity: 0.9 }}
+    />
+  );
+};
+
 export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) => {
   const [introState, setIntroState] = useState<'intro' | 'intro-play' | 'done'>('intro');
 
-  useEffect(() => {
-    // Kick off staggered entrance timeline on the next animation frame
-    const rAF = requestAnimationFrame(() => {
-      setIntroState('intro-play');
+  const triggerEntrance = () => {
+    setIntroState('intro');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIntroState('intro-play');
+      });
     });
-
-    // After the full choreographed timeline completes (~2.2s), clear classes so hover transforms and interactivity are 100% natural
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       setIntroState('done');
     }, 2200);
+  };
 
-    return () => {
-      cancelAnimationFrame(rAF);
-      clearTimeout(timer);
-    };
+  useEffect(() => {
+    triggerEntrance();
   }, []);
 
   const introClass = introState === 'intro' ? 'intro' : introState === 'intro-play' ? 'intro intro-play' : '';
 
   return (
     <div className={`min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center overflow-x-hidden selection:bg-sky-500 selection:text-white relative ${introClass}`}>
-      {/* Subtle Ambient Ocean Gradient & Light Caustics */}
+      {/* 🌊 Living Interactive Ocean Background Canvas */}
+      <OceanHeroCanvas />
+
+      {/* Subtle Ambient Ocean Gradient Mesh */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-0 left-1/4 w-[600px] h-full bg-gradient-to-b from-sky-200/[0.25] to-transparent rotate-12 blur-3xl"></div>
         <div className="absolute top-0 right-1/4 w-[500px] h-full bg-gradient-to-b from-teal-100/[0.25] to-transparent -rotate-12 blur-3xl"></div>
@@ -70,7 +219,16 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={triggerEntrance}
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-mono font-medium transition cursor-pointer"
+              title="Replay Choreographed Entrance"
+            >
+              <RotateCcw className="w-3 h-3 text-sky-600" />
+              <span>REPLAY INTRO</span>
+            </button>
+
             <span className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 font-mono font-medium">
               <Award className="w-3.5 h-3.5 text-emerald-600" />
               UN SDG 14: Life Below Water
