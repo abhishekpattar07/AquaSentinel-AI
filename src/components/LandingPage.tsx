@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Waves,
   Anchor,
@@ -21,8 +21,29 @@ interface Props {
 }
 
 export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) => {
+  const [introState, setIntroState] = useState<'intro' | 'intro-play' | 'done'>('intro');
+
+  useEffect(() => {
+    // Kick off staggered entrance timeline on the next animation frame
+    const rAF = requestAnimationFrame(() => {
+      setIntroState('intro-play');
+    });
+
+    // After the full choreographed timeline completes (~2.2s), clear classes so hover transforms and interactivity are 100% natural
+    const timer = setTimeout(() => {
+      setIntroState('done');
+    }, 2200);
+
+    return () => {
+      cancelAnimationFrame(rAF);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const introClass = introState === 'intro' ? 'intro' : introState === 'intro-play' ? 'intro intro-play' : '';
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center overflow-x-hidden selection:bg-sky-500 selection:text-white relative">
+    <div className={`min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center overflow-x-hidden selection:bg-sky-500 selection:text-white relative ${introClass}`}>
       {/* Subtle Ambient Ocean Gradient & Light Caustics */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-0 left-1/4 w-[600px] h-full bg-gradient-to-b from-sky-200/[0.25] to-transparent rotate-12 blur-3xl"></div>
@@ -31,7 +52,7 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
       </div>
 
       {/* Clean Floating Navbar (No academic clutter) */}
-      <header className="sticky top-4 z-50 w-full max-w-6xl px-4 sm:px-6">
+      <header className="hero-nav sticky top-4 z-50 w-full max-w-6xl px-4 sm:px-6" style={{ animationDelay: '0.08s' }}>
         <nav className="bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 flex items-center justify-between shadow-sm border border-slate-200">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 via-teal-500 to-emerald-500 text-white flex items-center justify-center shadow-md shadow-sky-500/20 font-bold">
@@ -69,30 +90,51 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
 
       {/* Hero Section */}
       <section className="w-full max-w-5xl px-6 pt-12 sm:pt-20 pb-4 flex flex-col items-center text-center relative z-10">
-        {/* Industry / Global Mission Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono text-sky-800 mb-6 shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>Global Ocean Conservation • Autonomous Subsea Telemetry Platform</span>
+        {/* Industry / Global Mission Badge Pill */}
+        <div
+          className="hero-pill inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200/90 text-xs font-mono text-slate-700 mb-6 shadow-xs hover:border-slate-300 transition-all cursor-default"
+          style={{ animationDelay: '0.22s' }}
+        >
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 font-semibold text-[11px]">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            UN SDG 14
+          </span>
+          <span className="text-slate-600 font-medium">Autonomous Subsea Telemetry & AI Cleanup</span>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
         </div>
 
-        {/* Main Title */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-hud tracking-tight leading-[1.1] max-w-4xl text-slate-950">
-          See What the Ocean Hides
-          <br />
-          <span className="bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">
-            Autonomous Subsea AI
+        {/* Main Title - Masked Line-by-Line Reveal */}
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-hud tracking-tight leading-[1.12] max-w-4xl text-slate-950">
+          <span className="ln">
+            <span className="ln-i" style={{ animationDelay: '0.34s' }}>
+              See What the Ocean Hides
+            </span>
+          </span>
+          <span className="ln mt-1 sm:mt-2">
+            <span
+              className="ln-i bg-gradient-to-r from-sky-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent"
+              style={{ animationDelay: '0.48s' }}
+            >
+              Autonomous Subsea AI
+            </span>
           </span>
         </h1>
 
         {/* Problem Statement Lead */}
-        <p className="mt-6 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-sans">
+        <p
+          className="hero-sub mt-6 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-sans"
+          style={{ animationDelay: '0.72s' }}
+        >
           Every year, <strong className="text-red-600 font-semibold">640,000 tons</strong> of ghost fishing nets and{' '}
           <strong className="text-amber-600 font-semibold">14 million tons</strong> of plastics sink into murky waters, invisible to human cameras. 
           AquaSentinel cuts through optical attenuation with <span className="text-sky-700 font-semibold">physics-based spectral dehazing</span>, detects marine hazards at 30 FPS, and dispatches automated AUV cleanup missions.
         </p>
 
         {/* Call to Actions */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+        <div
+          className="hero-cta mt-8 flex flex-col sm:flex-row items-center gap-4"
+          style={{ animationDelay: '0.90s' }}
+        >
           <button
             onClick={() => onLaunchDemo(0)}
             className="group flex items-center gap-3 px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-hud font-bold text-base sm:text-lg rounded-2xl shadow-lg shadow-sky-600/25 transition-all transform hover:scale-[1.02] active:scale-95 cursor-pointer"
@@ -104,7 +146,7 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
 
           <button
             onClick={onOpenPitchDeck}
-            className="flex items-center gap-2.5 px-6 py-4 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-hud font-bold text-sm sm:text-base rounded-2xl transition-all cursor-pointer shadow-sm"
+            className="flex items-center gap-2.5 px-6 py-4 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-hud font-bold text-sm sm:text-base rounded-2xl transition-all cursor-pointer shadow-sm hover:shadow"
           >
             <Presentation className="w-5 h-5 text-sky-600" />
             <span>10-SLIDE PITCH DECK</span>
@@ -112,7 +154,10 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
         </div>
 
         {/* Key Metrics Counter Strip */}
-        <div className="mt-12 w-full grid grid-cols-2 md:grid-cols-4 gap-4 font-mono">
+        <div
+          className="hero-metrics mt-12 w-full grid grid-cols-2 md:grid-cols-4 gap-4 font-mono"
+          style={{ animationDelay: '1.05s' }}
+        >
           <div className="bg-white border border-slate-200 p-5 rounded-2xl text-center shadow-sm">
             <div className="text-3xl font-hud font-black text-sky-600">99.4%</div>
             <div className="text-xs text-slate-500 uppercase tracking-wider mt-1 font-semibold">Model Precision</div>

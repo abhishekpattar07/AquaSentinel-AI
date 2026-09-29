@@ -67,6 +67,94 @@
         transform: translateY(-2px);
       }
 
+      /* =====================================================================
+         Award-Winning Entrance Animation System (Masked Typography & Timeline)
+         ===================================================================== */
+      :root {
+        --e-reveal: cubic-bezier(.18, .85, .26, 1);
+        --e-soft: cubic-bezier(.22, 1, .36, 1);
+        --e-nav: cubic-bezier(.33, 1, .68, 1);
+      }
+
+      /* Masked Line-by-Line Typography Reveal */
+      .ln {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 6px;
+        margin-bottom: -6px;
+      }
+      .ln-i {
+        display: block;
+        transform: translate3d(0, 0, 0);
+        will-change: transform;
+      }
+
+      /* Intro state (initial hidden positions before play) */
+      .intro .ln-i {
+        transform: translate3d(0, 115%, 0);
+      }
+      .intro .hero-pill {
+        opacity: 0;
+        transform: translate3d(0, 14px, 0) scale(0.96);
+      }
+      .intro .hero-sub {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0);
+      }
+      .intro .hero-cta {
+        opacity: 0;
+        transform: translate3d(0, 16px, 0);
+      }
+      .intro .hero-metrics {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+      }
+      .intro .hero-nav {
+        opacity: 0;
+        transform: translate3d(0, -12px, 0);
+      }
+
+      /* Intro Play state (orchestrated staggered timeline) */
+      .intro-play .ln-i {
+        animation: i-line 0.95s var(--e-reveal) both;
+      }
+      .intro-play .hero-pill {
+        animation: i-pill 0.85s var(--e-reveal) both;
+      }
+      .intro-play .hero-sub {
+        animation: i-sub 0.85s var(--e-soft) both;
+      }
+      .intro-play .hero-cta {
+        animation: i-btn 0.85s var(--e-soft) both;
+      }
+      .intro-play .hero-metrics {
+        animation: i-btn 0.85s var(--e-soft) both;
+      }
+      .intro-play .hero-nav {
+        animation: i-rise 0.70s var(--e-nav) both;
+      }
+
+      @keyframes i-line {
+        0% { transform: translate3d(0, 115%, 0); }
+        100% { transform: translate3d(0, 0, 0); }
+      }
+      @keyframes i-pill {
+        0% { transform: translate3d(0, 14px, 0) scale(0.96); opacity: 0; }
+        100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+      }
+      @keyframes i-sub {
+        0% { transform: translate3d(0, 18px, 0); opacity: 0; }
+        100% { transform: translate3d(0, 0, 0); opacity: 1; }
+      }
+      @keyframes i-btn {
+        0% { transform: translate3d(0, 16px, 0); opacity: 0; }
+        100% { transform: translate3d(0, 0, 0); opacity: 1; }
+      }
+      @keyframes i-rise {
+        0% { transform: translate3d(0, -12px, 0); opacity: 0; }
+        100% { transform: translate3d(0, 0, 0); opacity: 1; }
+      }
+
       /* Sonar Radar Sweep Animation */
       @keyframes sonar-sweep {
         0% { transform: rotate(0deg); }
@@ -155,6 +243,22 @@
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
           scroll-behavior: auto !important;
+        }
+        .intro .ln-i,
+        .intro-play .ln-i,
+        .intro .hero-pill,
+        .intro-play .hero-pill,
+        .intro .hero-sub,
+        .intro-play .hero-sub,
+        .intro .hero-cta,
+        .intro-play .hero-cta,
+        .intro .hero-metrics,
+        .intro-play .hero-metrics,
+        .intro .hero-nav,
+        .intro-play .hero-nav {
+          transform: none !important;
+          opacity: 1 !important;
+          animation: none !important;
         }
       }
     </style>
