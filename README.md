@@ -12,9 +12,9 @@ An AI-powered underwater video analytics platform engineered to detect ghost fis
 * **NOVA 2026 — International Grand Finale (BITS Pilani Dubai Campus)**
   * **Primary Track:** *Track C — Sustainable & Next-Generation Technologies*
   * **Secondary Tracks:** *Space & DeepTech (Robotics & Autonomous Systems)* • *AI for Humanity (UN SDG 14: Life Below Water)*
-* **Smart India Hackathon (SIH)**:
-  * **Ministry:** *Ministry of Earth Sciences (MoES)*
-  * **Problem Statement:** *AI-Powered Automated Underwater Marine Debris and Anomaly Detection System*
+* **Global SDG + AI Hackathon 2026**:
+  * **Primary Track:** *Climate, Water & Circularity*
+  * **Focus:** *Autonomous AI for Marine Ecosystems & Plastic Waste Interception*
 
 ---
 
@@ -134,7 +134,7 @@ All project logic, canvas shaders, dehazing algorithms, audio synthesizers, scen
 
 ## 🌍 Social Impact & Regional Alignment
 * **United Arab Emirates (Dubai / GCC)**: Directly supports Dubai's coastal marine sanctuaries, coral restoration initiatives, and COP28 Ocean Action continuity.
-* **India (MoES)**: Addresses the critical need for automated survey across India's 7,500 km coastline under the *Clean Sea* national initiative.
+* **Global Coastal Corridors**: Addresses the critical need for automated survey across vulnerable coastal corridors, coral reef biomes, and marine protected areas worldwide.
 * **United Nations Sustainable Development Goals**:
   * **UN SDG 14:** *Life Below Water*
   * **UN SDG 9:** *Industry, Innovation, and Infrastructure*

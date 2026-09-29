@@ -220,7 +220,7 @@ export function App() {
           </tbody>
         </table>
         <div class="footer">
-          AquaSentinel AI • Aligned with Ministry of Earth Sciences (MoES) SIH & NOVA 2026 BITS Pilani Dubai Grand Finale
+          AquaSentinel AI • Global Ocean Observation & Conservation • NOVA 2026 BITS Pilani Dubai Grand Finale
         </div>
       </body>
       </html>
@@ -272,7 +272,7 @@ export function App() {
               </span>
             </div>
             <p className="text-[11px] text-slate-400 font-mono">
-              Autonomous Underwater Debris & Anomaly Sentry • MoES / NOVA 2026
+              Autonomous Underwater Debris & Anomaly Sentry • UN SDG 14 / NOVA 2026
             </p>
           </div>
         </div>

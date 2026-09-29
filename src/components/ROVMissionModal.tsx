@@ -83,7 +83,7 @@ export const ROVMissionModal: React.FC<Props> = ({
                 AUTONOMOUS AUV / ROV MISSION DISPATCH
               </h3>
               <p className="text-[11px] font-mono text-slate-400">
-                MoES Marine Cleanup Telemetry Order
+                Subsea Ecological Cleanup Telemetry Order
               </p>
             </div>
           </div>

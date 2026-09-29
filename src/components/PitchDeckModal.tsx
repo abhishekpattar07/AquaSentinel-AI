@@ -15,7 +15,7 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
     {
       title: "AquaSentinel AI (SubSea Vision / بحر-سنتينل)",
       subtitle: "Autonomous Underwater Marine Debris & Ecological Anomaly Detection System",
-      tag: "NOVA 2026 & SIH (Ministry of Earth Sciences)",
+      tag: "Global Innovation • Track C: Sustainable Technologies",
       content: (
         <div className="flex flex-col items-center justify-center text-center space-y-4 py-8">
           <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-400 to-teal-500 text-black flex items-center justify-center text-4xl font-bold shadow-lg shadow-cyan-400/20">
@@ -26,7 +26,7 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
             Autonomous Underwater Debris Tracking, Physics-Based Spectral Dehazing, and AUV Fleet Mission Dispatch
           </p>
           <div className="flex flex-wrap gap-2 justify-center pt-2">
-            <span className="px-3 py-1 bg-ocean-900 border border-ocean-700 rounded-full text-xs text-slate-300">Ministry of Earth Sciences (MoES) PS</span>
+            <span className="px-3 py-1 bg-ocean-900 border border-ocean-700 rounded-full text-xs text-slate-300">Global Innovation & DeepTech</span>
             <span className="px-3 py-1 bg-ocean-900 border border-ocean-700 rounded-full text-xs text-slate-300">BITS Pilani Dubai Grand Finale</span>
             <span className="px-3 py-1 bg-cyan-500/10 border border-cyan-400/30 rounded-full text-xs text-cyan-400 font-bold">UN SDG 14: Life Below Water</span>
           </div>
@@ -226,8 +226,8 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
       ),
     },
     {
-      title: "Regional Dubai, UAE & Indian Ocean Impact",
-      subtitle: "Aligning with MoES, Arabian Gulf Conservation, and UN SDG 14",
+      title: "Regional Dubai, UAE & Global Ocean Impact",
+      subtitle: "Aligning with Arabian Gulf Conservation, International Treaties, and UN SDG 14",
       tag: "Slide 8: Regional Impact",
       content: (
         <div className="space-y-3 py-4 text-xs text-slate-300">
@@ -239,8 +239,8 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
           </div>
           <div className="grid grid-cols-2 gap-3 text-[11px]">
             <div className="p-3 bg-ocean-950 rounded-lg border border-ocean-800">
-              <strong className="text-white">MoES 'Clean Sea' Charter (India)</strong>
-              <p className="text-slate-400 mt-1">Directly addresses coastal plastic hotspots along the 7,500 km Indian coastline.</p>
+              <strong className="text-white">Global Coastal Protection Action</strong>
+              <p className="text-slate-400 mt-1">Directly addresses coastal plastic hotspots and vulnerable river delta outflows globally.</p>
             </div>
             <div className="p-3 bg-ocean-950 rounded-lg border border-ocean-800">
               <strong className="text-white">COP28 Ocean Action Continuity</strong>
@@ -287,7 +287,7 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
           <div className="p-3.5 bg-ocean-950 rounded-xl border border-ocean-800 inline-block text-left text-xs font-mono">
             <div>• <strong>Theme:</strong> Sustainable & Next-Gen Technologies / DeepTech</div>
             <div>• <strong>Organizer:</strong> KVGCE Sphere Hive × Microsoft Club, BITS Dubai</div>
-            <div>• <strong>SIH Track:</strong> Ministry of Earth Sciences (MoES)</div>
+            <div>• <strong>Global Goal:</strong> UN SDG 14: Life Below Water</div>
           </div>
         </div>
       ),

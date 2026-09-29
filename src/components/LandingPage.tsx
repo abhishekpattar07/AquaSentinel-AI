@@ -73,7 +73,7 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
           </span>
           <span className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-ocean-900/80 border border-ocean-700 rounded-full text-[11px] text-slate-300 font-mono">
             <Award className="w-3.5 h-3.5 text-emerald-400" />
-            SIH • MoES
+            UN SDG 14 • Global Innovation
           </span>
         </div>
       </nav>
@@ -130,7 +130,7 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
         {/* Trust Badges */}
         <div className="mt-8 flex flex-wrap justify-center gap-3 text-[11px] font-mono text-slate-400">
           <span className="px-3 py-1.5 bg-ocean-900/60 border border-ocean-800 rounded-full">
-            🎯 Ministry of Earth Sciences (MoES)
+            🌊 Global Ocean Conservation Action
           </span>
           <span className="px-3 py-1.5 bg-ocean-900/60 border border-ocean-800 rounded-full">
             🌍 UN SDG 14: Life Below Water
