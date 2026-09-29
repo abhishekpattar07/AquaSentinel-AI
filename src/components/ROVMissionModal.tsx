@@ -163,18 +163,18 @@ export const ROVMissionModal: React.FC<Props> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="flex items-center justify-between px-6 py-4 border-t border-ocean-800 bg-ocean-900">
+        <div className="flex items-center justify-between px-6 py-4 border-t border-ocean-800 bg-ocean-900/90 backdrop-blur">
           <button
             onClick={downloadBrief}
-            className="flex items-center gap-1.5 px-4 py-2 bg-ocean-800 hover:bg-ocean-700 text-slate-200 text-xs font-semibold rounded-lg transition"
+            className="flex items-center gap-1.5 px-4 py-2 bg-ocean-800 hover:bg-ocean-700 text-slate-200 text-xs font-semibold rounded-lg transition cursor-pointer"
           >
-            <Download className="w-4 h-4" /> Download Telemetry Brief
+            <Download className="w-4 h-4 text-cyan-400" /> Download Telemetry Brief (JSON)
           </button>
 
           <button
             disabled={isDeployed}
             onClick={handleDeploy}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-hud font-bold text-xs transition shadow-lg ${
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-hud font-bold text-xs transition shadow-lg cursor-pointer ${
               isDeployed
                 ? 'bg-emerald-600 text-white cursor-default'
                 : 'bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 text-black shadow-emerald-500/20'
