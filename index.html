@@ -77,14 +77,41 @@
         transform-origin: center center;
       }
 
-      /* Subtle Light Caustic Pulse */
-      @keyframes ocean-pulse-light {
-        0% { opacity: 0.2; }
-        50% { opacity: 0.45; }
-        100% { opacity: 0.2; }
+      /* Multi-Layer Flowing Ocean Waves */
+      @keyframes ocean-wave-1 {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(-25%); }
+        100% { transform: translateX(-50%); }
       }
-      .ocean-pulse {
-        animation: ocean-pulse-light 4s ease-in-out infinite;
+      @keyframes ocean-wave-2 {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(-35%); }
+        100% { transform: translateX(-70%); }
+      }
+      @keyframes ocean-wave-3 {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(-15%); }
+        100% { transform: translateX(-30%); }
+      }
+      .wave-layer-1 {
+        animation: ocean-wave-1 18s linear infinite alternate;
+      }
+      .wave-layer-2 {
+        animation: ocean-wave-2 12s ease-in-out infinite alternate;
+      }
+      .wave-layer-3 {
+        animation: ocean-wave-3 24s ease-in-out infinite alternate;
+      }
+
+      /* Gentle Floating Aquatic Bubble */
+      @keyframes float-bubble {
+        0% { transform: translateY(0) scale(0.9); opacity: 0; }
+        25% { opacity: 0.5; }
+        75% { opacity: 0.5; }
+        100% { transform: translateY(-140px) scale(1.15); opacity: 0; }
+      }
+      .bubble-float {
+        animation: float-bubble 7s ease-in-out infinite;
       }
 
       /* Clean Range Slider */

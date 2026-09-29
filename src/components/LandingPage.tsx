@@ -8,7 +8,6 @@ import {
   ShieldAlert,
   Sparkles,
   ChevronRight,
-  Globe,
   Award,
   Cpu,
   Presentation,
@@ -23,15 +22,15 @@ interface Props {
 
 export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) => {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center overflow-x-hidden selection:bg-sky-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center overflow-x-hidden selection:bg-sky-500 selection:text-white relative">
       {/* Subtle Ambient Ocean Gradient & Light Caustics */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-0 left-1/4 w-[600px] h-full bg-gradient-to-b from-sky-200/[0.3] to-transparent rotate-12 ocean-pulse blur-3xl"></div>
-        <div className="absolute top-0 right-1/4 w-[500px] h-full bg-gradient-to-b from-teal-100/[0.3] to-transparent -rotate-12 ocean-pulse blur-3xl" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-blue-100/[0.2] to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/4 w-[600px] h-full bg-gradient-to-b from-sky-200/[0.25] to-transparent rotate-12 blur-3xl"></div>
+        <div className="absolute top-0 right-1/4 w-[500px] h-full bg-gradient-to-b from-teal-100/[0.25] to-transparent -rotate-12 blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-blue-100/[0.15] to-transparent rounded-full blur-3xl"></div>
       </div>
 
-      {/* Clean Floating Navbar */}
+      {/* Clean Floating Navbar (No academic clutter) */}
       <header className="sticky top-4 z-50 w-full max-w-6xl px-4 sm:px-6">
         <nav className="bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 flex items-center justify-between shadow-sm border border-slate-200">
           <div className="flex items-center gap-3">
@@ -50,34 +49,30 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 font-mono font-medium">
+              <Award className="w-3.5 h-3.5 text-emerald-600" />
+              UN SDG 14: Life Below Water
+            </span>
+
             <button
               onClick={onOpenPitchDeck}
               className="flex items-center gap-2 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 rounded-xl text-xs font-hud font-bold transition shadow-sm cursor-pointer"
+              title="Review 10-Slide Pitch Deck"
             >
               <Presentation className="w-3.5 h-3.5 text-sky-600" />
               <span>PITCH DECK</span>
             </button>
-
-            <span className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-700 font-mono">
-              <Globe className="w-3.5 h-3.5 text-sky-600" />
-              NOVA 2026 • BITS Pilani Dubai
-            </span>
-
-            <span className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 font-mono font-medium">
-              <Award className="w-3.5 h-3.5 text-emerald-600" />
-              UN SDG 14
-            </span>
           </div>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section className="w-full max-w-5xl px-6 pt-12 sm:pt-20 pb-8 flex flex-col items-center text-center relative z-10">
-        {/* Track Identifier Badge */}
+      <section className="w-full max-w-5xl px-6 pt-12 sm:pt-20 pb-4 flex flex-col items-center text-center relative z-10">
+        {/* Industry / Global Mission Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono text-sky-800 mb-6 shadow-sm">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>NOVA 2026 Grand Finale Track • Sustainable & DeepTech AI</span>
+          <span>Global Ocean Conservation • Autonomous Subsea Telemetry Platform</span>
         </div>
 
         {/* Main Title */}
@@ -136,6 +131,42 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
           </div>
         </div>
       </section>
+
+      {/* 🌊 Elegant Flowing Ocean Waves & Gentle Bubbles Section */}
+      <div className="w-full overflow-hidden relative leading-none py-4 pointer-events-none select-none z-10">
+        {/* Rising aquatic bubbles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(14)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full border border-sky-300/40 bg-sky-200/25 bubble-float"
+              style={{
+                width: `${7 + (i * 3) % 15}px`,
+                height: `${7 + (i * 3) % 15}px`,
+                left: `${5 + (i * 7.1) % 90}%`,
+                bottom: '0px',
+                animationDelay: `${i * 0.45}s`,
+                animationDuration: `${5.5 + (i % 3) * 2}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Wave Layer 1 (Back Deep Oceanic Wave) */}
+        <svg className="w-[200%] h-12 text-sky-200/35 wave-layer-1 fill-current" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,80 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z"></path>
+        </svg>
+
+        {/* Wave Layer 2 (Mid Sea-Foam Wave) */}
+        <svg className="w-[200%] h-14 -mt-8 text-teal-200/30 wave-layer-2 fill-current" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,40 C200,-20 400,80 600,30 C800,-20 1000,70 1200,20 L1200,120 L0,120 Z"></path>
+        </svg>
+
+        {/* Wave Layer 3 (Front Gentle Ripple) */}
+        <svg className="w-[200%] h-16 -mt-10 text-sky-100/60 wave-layer-3 fill-current" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,20 C300,90 600,-30 900,50 C1050,90 1150,40 1200,30 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
 
       {/* Bento Grid Showcase */}
       <section className="w-full max-w-6xl px-6 py-12 relative z-10">
@@ -435,7 +466,7 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
           <span>•</span>
           <span className="text-sky-700 font-semibold">SubSea Vision Engine</span>
         </div>
-        <div>NOVA 2026 Grand Finale • BITS Pilani Dubai Campus</div>
+        <div>Global SDG 14 Marine Environmental Intelligence</div>
       </footer>
     </div>
   );

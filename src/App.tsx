@@ -294,9 +294,9 @@ export function App() {
             <Presentation className="w-3.5 h-3.5 text-sky-600" />
             <span className="hidden sm:inline">PITCH DECK</span>
           </button>
-          <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-sky-50 border border-sky-200 rounded-full text-[11px] text-sky-800 font-mono font-medium">
-            <Award className="w-3.5 h-3.5 text-sky-600" />
-            <span>BITS Pilani Dubai Grand Finale Track</span>
+          <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[11px] text-emerald-800 font-mono font-medium">
+            <Award className="w-3.5 h-3.5 text-emerald-600" />
+            <span>UN SDG 14: Life Below Water</span>
           </div>
         </div>
       </header>
