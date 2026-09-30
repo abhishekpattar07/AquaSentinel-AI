@@ -270,7 +270,7 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
     },
     {
       title: "Product Roadmap & Commercial Milestones",
-      subtitle: "From hackathon prototype to maritime deployment",
+      subtitle: "From engineering prototype to autonomous maritime fleet deployment",
       tag: "Slide 9: Roadmap",
       content: (
         <div className="space-y-2.5 py-4 text-xs font-mono text-slate-700">

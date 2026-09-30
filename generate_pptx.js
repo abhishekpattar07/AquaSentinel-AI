@@ -286,7 +286,7 @@ function createContentSlide(title, category, subtitle) {
 // SLIDE 9: Roadmap (with Infographic)
 // ============================================================
 {
-  let s9 = createContentSlide("Product Roadmap & Commercial Milestones", "Milestones", "A clear path from hackathon prototype to maritime fleet integration.");
+  let s9 = createContentSlide("Product Roadmap & Commercial Milestones", "Milestones", "A clear path from engineering prototype to maritime fleet integration.");
 
   const phases = [
     { phase: "PHASE 1: CURRENT (Q3 2026)", title: "NOVA 2026 Submission", desc: "Interactive browser command dashboard, Gemini Vision classification, 120 kHz sonar chirp, and AUV telemetry order generator." },
