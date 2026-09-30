@@ -21,6 +21,8 @@ export const ROVMissionModal: React.FC<Props> = ({
 
   const missionId = `AUV-EXPEDITION-${scenario.id.toUpperCase().slice(0, 4)}-${Math.floor(1000 + Math.random() * 9000)}`;
   const debrisItems = bboxes.filter(b => b.category !== 'marine_life');
+  const faunaItems = bboxes.filter(b => b.category === 'marine_life');
+  const hasProtectedFauna = faunaItems.length > 0;
   const totalWeightKg = debrisItems.reduce((acc, b) => acc + (b.estimatedWeightKg || 5), 0);
 
   // Recommended tool payload based on detected debris
@@ -48,18 +50,30 @@ export const ROVMissionModal: React.FC<Props> = ({
   const downloadBrief = () => {
     const briefData = {
       missionId,
+      telemetryStandard: "ROS2-Humble / MAVLink v2.0 Protocol (Hardware-in-the-Loop Simulation)",
+      ros2Topic: "/auv/mission_dispatch",
+      team: "Trinex Bytes",
+      event: "NOVA 2026 Grand Finale — BITS Pilani Dubai Campus",
       timestamp: new Date().toISOString(),
       location: scenario.location,
-      gps: scenario.coordinates,
+      gpsCoordinates: scenario.coordinates,
       targetDepthMeters: scenario.depthMeters,
       threatRating: scenario.expectedThreat,
+      faunaSafetyInterlock: hasProtectedFauna ? "ENGAGED — 5.0m PERIMETER ACTIVE (AGGRESSIVE CUTTERS INTERLOCKED)" : "STANDBY — CLEAR",
       totalEstimatedDebrisKg: totalWeightKg,
       payloadConfig: payloadTool,
       operationalDirectives: recommendedAction,
-      detectedHazards: debrisItems.map(d => ({
+      detectedDebrisHazards: debrisItems.map(d => ({
         label: d.label,
+        category: d.category,
         confidence: d.confidence,
         threat: d.threatLevel,
+        massKg: d.estimatedWeightKg,
+      })),
+      protectedFaunaInPerimeter: faunaItems.map(f => ({
+        species: f.label,
+        safetyStatus: "PROTECTED_NO_CONTACT",
+        perimeterMeters: 5.0,
       })),
     };
 
@@ -67,7 +81,7 @@ export const ROVMissionModal: React.FC<Props> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${missionId}-TELEMETRY.json`;
+    a.download = `${missionId}-ROS2-TELEMETRY.json`;
     a.click();
   };
 
@@ -81,11 +95,16 @@ export const ROVMissionModal: React.FC<Props> = ({
               <Anchor className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-hud text-base font-bold text-slate-900">
-                AUTONOMOUS AUV / ROV MISSION DISPATCH
-              </h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-hud text-base font-bold text-slate-900">
+                  AUTONOMOUS AUV / ROV MISSION DISPATCH
+                </h3>
+                <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-sky-100 text-sky-800 font-bold border border-sky-200">
+                  SIMULATION PROTOCOL
+                </span>
+              </div>
               <p className="text-[11px] font-mono text-slate-500">
-                Subsea Ecological Cleanup Telemetry Order
+                Subsea Telemetry Dispatch Order • Team Trinex Bytes (ROS2 / MAVLink Standard)
               </p>
             </div>
           </div>
@@ -132,6 +151,21 @@ export const ROVMissionModal: React.FC<Props> = ({
               <div className="text-xs font-bold text-amber-700 mt-0.5">~{totalWeightKg.toFixed(1)} kg</div>
             </div>
           </div>
+
+          {/* Fauna Safety Interlock Alert */}
+          {hasProtectedFauna && (
+            <div className="p-3.5 bg-amber-50 rounded-2xl border-2 border-amber-400 flex items-start gap-3 shadow-xs">
+              <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+              <div>
+                <div className="font-hud font-bold text-amber-900 text-xs">
+                  🛡️ FAUNA CO-EXISTENCE INTERLOCK ACTIVE (5.0m SAFETY ZONE)
+                </div>
+                <p className="text-[11px] text-amber-800 font-mono mt-0.5 leading-relaxed">
+                  Protected marine species detected ({faunaItems.map(f => f.label).join(', ')}). Robotic payload cutting arms and high-torque rotary tools are <strong>automatically interlocked (inhibited)</strong>. Telemetry orders enforce gentle non-invasive survey standoff.
+                </p>
+              </div>
+            </div>
+          )}
 
           {/* Robotic Payload Tooling */}
           <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
@@ -190,7 +224,11 @@ export const ROVMissionModal: React.FC<Props> = ({
             ) : (
               <>
                 <Send className="w-4 h-4" />
-                <span>AUTHORIZE & TRANSMIT AUV ORDERS</span>
+                <span>
+                  {hasProtectedFauna
+                    ? 'AUTHORIZE TELEMETRY (FAUNA-SAFE INTERLOCK ACTIVE)'
+                    : 'AUTHORIZE & TRANSMIT AUV ORDERS'}
+                </span>
               </>
             )}
           </button>

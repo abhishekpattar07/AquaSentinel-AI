@@ -158,6 +158,38 @@ export const VideoAnalyzer = forwardRef<VideoAnalyzerRef, Props>(({
         ctx.fillText(`MASS: ~${box.estimatedWeightKg} kg`, bx + 8, by + bh + 18);
       }
 
+      // 🛡️ Marine Life 5-Meter Co-existence Safety Perimeter (Prototype Simulation)
+      if (box.category === 'marine_life') {
+        const centerX = bx + bw / 2;
+        const centerY = by + bh / 2;
+        const radius = Math.max(bw, bh) * 0.85 + 24;
+
+        ctx.save();
+        ctx.strokeStyle = '#059669'; // Emerald
+        ctx.lineWidth = 2;
+        ctx.setLineDash([6, 5]);
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Safety Perimeter Label Badge
+        const tagText = '🛡️ 5.0m FAUNA SAFETY PERIMETER (INTERVENTION INTERLOCKED)';
+        ctx.font = 'bold 9px Orbitron, monospace';
+        const tagMetrics = ctx.measureText(tagText);
+        const tagW = tagMetrics.width + 12;
+        const tagX = Math.max(10, Math.min(canvas.width - tagW - 10, centerX - tagW / 2));
+        const tagY = Math.min(canvas.height - 10, centerY + radius + 15);
+
+        ctx.fillStyle = 'rgba(5, 150, 105, 0.95)';
+        ctx.fillRect(tagX, tagY - 13, tagW, 18);
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(tagX, tagY - 13, tagW, 18);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText(tagText, tagX + 6, tagY);
+        ctx.restore();
+      }
+
       ctx.restore();
     });
   }, [filteredBboxes]);

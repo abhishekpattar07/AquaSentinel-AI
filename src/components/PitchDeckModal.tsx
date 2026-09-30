@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, Anchor, Waves, Cpu, ShieldAlert, Sparkles, Keyboard } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Anchor, Waves, Cpu, ShieldAlert, Sparkles, Keyboard, Download } from 'lucide-react';
 
 interface Props {
   isOpen: boolean;
@@ -43,6 +43,7 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
             Autonomous Underwater Debris Tracking, Physics-Based Spectral Dehazing, and AUV Fleet Mission Dispatch
           </p>
           <div className="flex flex-wrap gap-2 justify-center pt-2">
+            <span className="px-3 py-1 bg-sky-100 border border-sky-300 rounded-full text-xs text-sky-900 font-bold">Team: Trinex Bytes</span>
             <span className="px-3 py-1 bg-slate-100 border border-slate-200 rounded-full text-xs text-slate-700 font-medium">Global Innovation & DeepTech</span>
             <span className="px-3 py-1 bg-slate-100 border border-slate-200 rounded-full text-xs text-slate-700 font-medium">BITS Pilani Dubai Grand Finale</span>
             <span className="px-3 py-1 bg-sky-50 border border-sky-200 rounded-full text-xs text-sky-800 font-bold">UN SDG 14: Life Below Water</span>
@@ -232,7 +233,7 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </div>
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
               <div className="text-2xl font-bold text-emerald-700">Edge-Ready</div>
-              <div className="text-xs text-slate-500 mt-1">NVIDIA Jetson / WASM</div>
+              <div className="text-xs text-slate-500 mt-1">[Target Spec: NVIDIA Jetson Orin Nano]</div>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
               <div className="text-2xl font-bold text-amber-700">100%</div>
@@ -302,6 +303,7 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
             A state-of-the-art environmental intelligence platform ready for the international grand jury at BITS Pilani Dubai.
           </p>
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 inline-block text-left text-xs font-mono text-slate-700">
+            <div>• <strong>Team:</strong> Trinex Bytes</div>
             <div>• <strong>Theme:</strong> Sustainable & Next-Gen Technologies / DeepTech</div>
             <div>• <strong>Organizer:</strong> KVGCE Sphere Hive × Microsoft Club, BITS Dubai</div>
             <div>• <strong>Global Goal:</strong> UN SDG 14: Life Below Water</div>
@@ -333,6 +335,16 @@ export const PitchDeckModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </span>
           </div>
           <div className="flex items-center gap-3">
+            <a
+              href="/AquaSentinel_NOVA2026_PitchDeck.pptx"
+              download="AquaSentinel_NOVA2026_PitchDeck.pptx"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-mono font-bold transition shadow-xs cursor-pointer"
+              title="Download PowerPoint Presentation (.pptx)"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>DOWNLOAD .PPTX</span>
+            </a>
+
             <span className="hidden sm:flex items-center gap-1 text-[11px] font-mono text-slate-500">
               <Keyboard className="w-3.5 h-3.5 text-sky-600" />
               <span>Use ← / → keys</span>

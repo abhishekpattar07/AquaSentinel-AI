@@ -177,35 +177,72 @@ export function App() {
   // Export Printable Environmental Survey Report
   const handleExportReport = () => {
     playTacticalClick();
+    const frameBase64 = analyzerRef.current?.captureFrame();
+
+    // Compute live MPI Score for the report
+    const ghostNets = bboxes.filter(b => b.category === 'ghost_net').length;
+    const plastics = bboxes.filter(b => b.category === 'plastic' || b.category === 'metal_debris').length;
+    const toxics = bboxes.filter(b => b.category === 'toxic_drum').length;
+    const mpiScore = Math.min(100, Math.max(12, (ghostNets * 35) + (toxics * 45) + (plastics * 15)));
+
     const reportHtml = `
       <!DOCTYPE html>
       <html>
       <head>
-        <title>AquaSentinel AI - Environmental Survey Report</title>
+        <title>AquaSentinel AI — Marine Survey Report</title>
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; color: #0f172a; line-height: 1.6; }
-          h1 { color: #0284c7; border-bottom: 2px solid #0284c7; padding-bottom: 8px; }
-          .meta { background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 25px; }
-          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-          th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: left; }
-          th { background: #f1f5f9; }
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 36px; color: #0f172a; line-height: 1.5; max-width: 900px; margin: 0 auto; }
+          .header-bar { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0284c7; padding-bottom: 12px; margin-bottom: 20px; }
+          h1 { color: #0284c7; font-size: 24px; margin: 0 0 4px 0; }
+          .team-tag { font-size: 13px; color: #0f172a; font-weight: 600; }
+          .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px; font-size: 13px; }
+          .mpi-badge { background: ${mpiScore >= 70 ? '#fee2e2' : mpiScore >= 40 ? '#fef3c7' : '#d1fae5'}; color: ${mpiScore >= 70 ? '#991b1b' : mpiScore >= 40 ? '#92400e' : '#065f46'}; border: 1px solid ${mpiScore >= 70 ? '#f87171' : mpiScore >= 40 ? '#fcd34d' : '#6ee7b7'}; padding: 6px 12px; border-radius: 6px; font-weight: bold; display: inline-block; }
+          .snapshot-box { margin: 20px 0; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; background: #f8fafc; text-align: center; }
+          .snapshot-box img { max-width: 100%; height: auto; border-radius: 6px; }
+          .snapshot-caption { font-size: 11px; color: #64748b; margin-top: 6px; font-family: monospace; }
+          table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 12px; }
+          th, td { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; }
+          th { background: #f1f5f9; font-weight: 600; color: #334155; }
           .critical { color: #dc2626; font-weight: bold; }
-          .footer { margin-top: 40px; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; }
+          .footer { margin-top: 36px; font-size: 11px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; display: flex; justify-content: space-between; }
         </style>
       </head>
       <body>
-        <h1>🌊 AquaSentinel AI — Marine Survey & Telemetry Report</h1>
-        <div class="meta">
-          <p><strong>Site:</strong> ${currentScenario.title} (${currentScenario.location})</p>
-          <p><strong>Coordinates:</strong> ${currentScenario.coordinates} | <strong>Depth:</strong> ${currentScenario.depthMeters} m | <strong>Turbidity:</strong> ${currentScenario.turbidityPct}%</p>
-          <p><strong>Generated on:</strong> ${new Date().toLocaleString()}</p>
+        <div class="header-bar">
+          <div>
+            <h1>🌊 AquaSentinel AI — Environmental Survey & Telemetry Report</h1>
+            <div class="team-tag">Project by Team Trinex Bytes • NOVA 2026 Grand Finale (Track C: Sustainable Tech)</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="mpi-badge">MPI SCORE: ${mpiScore} / 100</div>
+          </div>
         </div>
-        <h2>AI Oceanographic Mission Briefing</h2>
-        <p>${currentScenario.narrativeReport}</p>
-        <h2>Identified Debris & Bio Targets</h2>
+
+        <div class="meta-grid">
+          <div><strong>Survey Site:</strong> ${currentScenario.title}</div>
+          <div><strong>Location:</strong> ${currentScenario.location}</div>
+          <div><strong>GPS Coordinates:</strong> ${currentScenario.coordinates}</div>
+          <div><strong>Operational Depth:</strong> -${currentScenario.depthMeters} m</div>
+          <div><strong>Water Turbidity:</strong> ${currentScenario.turbidityPct}%</div>
+          <div><strong>Report Timestamp:</strong> ${new Date().toLocaleString()}</div>
+        </div>
+
+        ${frameBase64 ? `
+          <div class="snapshot-box">
+            <img src="${frameBase64}" alt="Optical Survey Snapshot" />
+            <div class="snapshot-caption">FIGURE 1: OPTICAL SURVEY SNAPSHOT — SPECTRAL DEHAZED & NEURAL ANNOTATED TELEMETRY FRAME</div>
+          </div>
+        ` : ''}
+
+        <h3 style="margin-bottom: 6px; color: #0f172a;">AI Oceanographic Mission Briefing</h3>
+        <p style="background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 12.5px; color: #334155; margin-top: 0;">
+          ${currentScenario.narrativeReport}
+        </p>
+
+        <h3 style="margin-bottom: 6px; color: #0f172a;">Identified Debris & Marine Bio Targets (${bboxes.length} Detected)</h3>
         <table>
           <thead>
-            <tr><th>Label</th><th>Category</th><th>Confidence</th><th>Threat Level</th><th>Estimated Mass</th></tr>
+            <tr><th>Target Label</th><th>Category</th><th>Confidence</th><th>Threat Level</th><th>Est. Mass</th></tr>
           </thead>
           <tbody>
             ${bboxes.map(b => `
@@ -219,8 +256,10 @@ export function App() {
             `).join('')}
           </tbody>
         </table>
+
         <div class="footer">
-          AquaSentinel AI • Global Ocean Observation & Conservation • NOVA 2026 BITS Pilani Dubai Grand Finale
+          <span>AquaSentinel AI • Team Trinex Bytes • BITS Pilani Dubai Campus × Microsoft Tech Club</span>
+          <span>UN SDG 14: Life Below Water</span>
         </div>
       </body>
       </html>
@@ -272,7 +311,7 @@ export function App() {
               </span>
             </div>
             <p className="text-[11px] text-slate-500 font-mono">
-              Autonomous Underwater Debris & Anomaly Sentry • UN SDG 14 / NOVA 2026
+              Autonomous Underwater Debris & Anomaly Sentry • Team Trinex Bytes • NOVA 2026
             </p>
           </div>
         </div>

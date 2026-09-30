@@ -323,8 +323,8 @@ export const MarineHUD: React.FC<Props> = ({
               <Radio className="w-3.5 h-3.5 text-sky-600" />
               <span>120 kHz SONAR</span>
             </span>
-            <span className="text-[9px] font-mono text-sky-800 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200 font-semibold">
-              50m SWEEP
+            <span className="text-[8.5px] font-mono text-sky-800 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200 font-semibold">
+              ACOUSTIC SIMULATION
             </span>
           </div>
 
@@ -351,6 +351,9 @@ export const MarineHUD: React.FC<Props> = ({
             <span>PING: <strong className="text-sky-700">120.4 kHz</strong></span>
             <span>BEARING: <strong className="text-slate-900">142° SE</strong></span>
           </div>
+          <div className="mt-1 text-[9px] font-mono text-slate-400 text-center">
+            Acoustic spatial fallback when turbidity &gt; 60%
+          </div>
         </div>
 
         {/* Marine Pollution Index & Metrics */}
@@ -365,13 +368,18 @@ export const MarineHUD: React.FC<Props> = ({
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200 mb-3">
+          <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200 mb-2">
             <div
               className={`h-full transition-all duration-500 rounded-full ${
                 mpiScore >= 70 ? 'bg-red-600' : mpiScore >= 40 ? 'bg-amber-500' : 'bg-emerald-600'
               }`}
               style={{ width: `${mpiScore}%` }}
             />
+          </div>
+
+          {/* MPI Mathematical Formula Badge */}
+          <div className="text-[9.5px] font-mono text-slate-500 bg-slate-50 px-2 py-1 rounded-lg border border-slate-200 text-center mb-2.5">
+            MPI = Σ(W<sub>i</sub> × T<sub>i</sub>) • Weighted: Toxics (45%), Nets (35%), Polymers (15%)
           </div>
 
           {/* 4 Counter Badges */}

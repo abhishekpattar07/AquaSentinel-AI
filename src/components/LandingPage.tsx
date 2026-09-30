@@ -257,7 +257,7 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             UN SDG 14
           </span>
-          <span className="text-slate-600 font-medium">Autonomous Subsea Telemetry & AI Cleanup</span>
+          <span className="text-slate-600 font-medium">Autonomous Subsea Telemetry & AI Cleanup • Team Trinex Bytes</span>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
         </div>
 
@@ -667,9 +667,11 @@ export const LandingPage: React.FC<Props> = ({ onLaunchDemo, onOpenPitchDeck }) 
         <div className="flex items-center gap-2">
           <span>© 2026 AquaSentinel AI</span>
           <span>•</span>
+          <span className="text-slate-700 font-semibold">Team Trinex Bytes</span>
+          <span>•</span>
           <span className="text-sky-700 font-semibold">SubSea Vision Engine</span>
         </div>
-        <div>Global SDG 14 Marine Environmental Intelligence</div>
+        <div>NOVA 2026 Grand Finale (BITS Pilani Dubai) • UN SDG 14: Life Below Water</div>
       </footer>
     </div>
   );
